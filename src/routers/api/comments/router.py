@@ -26,6 +26,8 @@ async def create_comment(
     *,
     data: CreateCommentRequestScheme
 ):
+    """Create comment to post"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -45,6 +47,8 @@ async def update_comment(
     *,
     data: UpdateCommentRequestScheme
 ):
+    """Update post; available fields for update: content"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -61,6 +65,8 @@ async def get_comment(
     token: str = Query(None),
     comment_id: int = Query(None)
 ):
+    """Get comment by id"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -76,6 +82,8 @@ async def get_all_comments(
     token: str = Query(None),
     post_id: int = Query(None)
 ):
+    """Get all comments of post"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -93,6 +101,8 @@ async def delete_comment(
     *,
     data: DeleteCommentRequestScheme
 ):
+    """Delete comment"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')

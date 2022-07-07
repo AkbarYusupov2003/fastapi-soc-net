@@ -23,18 +23,26 @@ async def set_like_or_dislike_to_post(
     *,
     data: LikeRequestScheme
 ):
+    """Set like or dislike to post;
+    if amount more 0 or amount equal 0 then it like else it dislike"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
     db_post = posts.get_post(db, data.post_id)
     if not db_post:
         raise HTTPException(404, 'Post not found')
+    db_like = likes.get_like(db, db_post.id, db_user.id)
     data.amount = -1 if data.amount < 0 else 1
-    db_like = likes.set_like(
-        user_id=db_user.id,
-        post_id=db_post.id,
-        amount=data.amount
-    )
+    if db_like:
+        db_like.amount = data.amount
+        db_like = likes.update_like(db, db_like)
+    else:
+        db_like = likes.set_like(
+            user_id=db_user.id,
+            post_id=db_post.id,
+            amount=data.amount
+        )
     return db_like
 
 
@@ -44,6 +52,8 @@ async def post_is_liked(
     token: str = Query(None),
     post_id: int = Query(None)
 ):
+    """Get is post liked"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -61,6 +71,8 @@ async def delete_like_or_dislike(
     *,
     data: DeleteLikeRequestScheme
 ):
+    """Delete like or dislike"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')

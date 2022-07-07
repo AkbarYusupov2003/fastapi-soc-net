@@ -30,3 +30,13 @@ def get_like(
     return db.query(Like).where(
         Like.user_id == user_id, Like.post_id == post_id
     ).first()
+
+
+def update_like(
+    db: Session,
+    db_like: Like
+) -> Like:
+    db.add(db_like)
+    db.commit()
+    db.refresh(db_like)
+    return db_like

@@ -24,6 +24,8 @@ async def create_post(
     *,
     data: CreatePostRequestScheme
 ):
+    """Create post to database"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -37,6 +39,8 @@ async def get_by_id(
     token: str = Query(None),
     post_id: int = Query(None)
 ):
+    """Get post by id"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -53,6 +57,8 @@ async def update_post(
     *,
     data: UpdatePostRequestScheme
 ):
+    """Update post; available fields for update: content"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
@@ -74,6 +80,8 @@ async def delete_post(
     *,
     data: DeletePostRequestScheme
 ):
+    """Delete post from database"""
+
     db_user = tokens.get_user_by_token(db, token)
     if not db_user:
         raise HTTPException(404, 'Token not found')
