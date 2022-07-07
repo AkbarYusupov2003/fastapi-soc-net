@@ -22,6 +22,7 @@ class OkResponseScheme(BaseModel):
 class CreatePostRequestScheme(BaseModel):
     content: str
 
+
 class UpdatePostRequestScheme(BaseModel):
     id: int
     content: Optional[str] = None

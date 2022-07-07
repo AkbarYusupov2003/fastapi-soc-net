@@ -35,7 +35,9 @@ class Post(Base):
     owner_id = sa.Column(sa.Integer, sa.ForeignKey('users.id'))
     content = sa.Column(sa.Text, nullable=False)
     created_at = sa.Column(sa.DateTime, default=sa.func.now())
-    updated_at = sa.Column(sa.DateTime, default=sa.func.now(), onupdate=sa.func.now())
+    updated_at = sa.Column(
+        sa.DateTime, default=sa.func.now(), onupdate=sa.func.now()
+    )
 
     comments = relationship('Comment')
     likes = relationship('Like')
