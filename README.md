@@ -1,15 +1,15 @@
 # Simple Social Network powered by Python 3 and FastAPI
 
 ### Starting:
-1. Install dependences from `requirements.txt`
+1. Install dependencies from `requirements.txt`
 ```shell
 pip install -r requirements.txt
 ```
-2. Do a migrations
+2. Create relation with the database
 ```shell
 alembic init alembic
 ```
-Next you need set URI to database in `alembic.ini` and set metadata in `alembic/env.py`\
+Next you need setup URI to the database in `alembic.ini` and set metadata in `alembic/env.py`\
 Next make migrations:
 ```shell
 alembic revision --autogenerate
@@ -18,9 +18,9 @@ And do a migrations:
 ```shell
 alembic upgrade head
 ```
-3. Setting enviroment
-Rename file `.env.simple` to `.env` and fill variables with values.
-4. Start by uvicorn
+3. Setting up enviroment,
+rename file `.env.simple` to `.env` and fill variables with values.
+4. Start with uvicorn
 ```shell
 uvicorn src.app:app --host 0.0.0.0 --port 8080
 ```
